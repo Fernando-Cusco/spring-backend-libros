@@ -35,10 +35,9 @@ public class LibroRest {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(value = "/libro", consumes = { "multipart/form-data" })
+    @PostMapping(value = "/libro")
     public ResponseEntity<Libro> nuevo(@RequestBody Libro libro) {
-
-//        service.save(libro);
+        service.save(libro);
         return ResponseEntity.ok(libro);
     }
 
