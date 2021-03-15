@@ -28,11 +28,14 @@ public class UsuarioRest {
             Usuario usuario = service.login(credenciales.getEmail(), credenciales.getPassword());
             if (usuario != null) {
                 usuario.setPassword("");
+                usuario.setCorrectLogin(true);
                 return ResponseEntity.ok(usuario);
             } else {
+                empty.setCorrectLogin(false);
                 return ResponseEntity.ok(empty);
             }
         }
+        empty.setCorrectLogin(false);
         return ResponseEntity.ok(empty);
     }
 

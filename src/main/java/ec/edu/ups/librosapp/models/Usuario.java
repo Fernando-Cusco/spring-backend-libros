@@ -31,7 +31,7 @@ public class Usuario implements Serializable {
     private String password;
 
     private String estado;
-
+    private boolean correctLogin;
     @Column(name = "create_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
@@ -113,5 +113,13 @@ public class Usuario implements Serializable {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public boolean isCorrectLogin() {
+        return correctLogin;
+    }
+
+    public void setCorrectLogin(boolean correctLogin) {
+        this.correctLogin = correctLogin;
     }
 }
