@@ -1,6 +1,8 @@
 package ec.edu.ups.librosapp.utils;
 
-public class Response {
+import java.io.Serializable;
+
+public class Response implements Serializable {
     private String mensaje;
 
     private String estado;
@@ -39,4 +41,6 @@ public class Response {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
+
+    private static final long serialVersionUID = 1L;
 }
