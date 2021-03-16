@@ -22,7 +22,6 @@ public class Libro implements Serializable {
 
     private int numeroPaginas;
 
-//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "libros_autores", joinColumns =
             {@JoinColumn(name = "libro_id", referencedColumnName = "id", nullable = false, updatable = false)},

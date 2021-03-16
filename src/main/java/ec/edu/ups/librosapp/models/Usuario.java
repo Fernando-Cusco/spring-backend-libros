@@ -1,11 +1,11 @@
 package ec.edu.ups.librosapp.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "usuarios")
@@ -28,10 +28,17 @@ public class Usuario implements Serializable{
     @Column(unique = true)
     private String email;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(name = "usuarios_roles", joinColumns = {
+            @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = false, updatable = false) }, inverseJoinColumns = {
+            @JoinColumn(name = "rol_id", referencedColumnName = "id", nullable = false, updatable = false) })
+    private List<Rol> roles = new ArrayList<>();
 
     private String password;
 
     private String estado;
+
+    private String token;
 
     private boolean correctLogin;
 
@@ -40,9 +47,11 @@ public class Usuario implements Serializable{
     @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
 
-
-
+    public void addRole(Rol rol) {
+        this.roles.add(rol);
+    }
     private static final long serialVersionUID = 1L;
+
 
     @PrePersist
     public void create() {
@@ -127,5 +136,21 @@ public class Usuario implements Serializable{
 
     public void setCorrectLogin(boolean correctLogin) {
         this.correctLogin = correctLogin;
+    }
+
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

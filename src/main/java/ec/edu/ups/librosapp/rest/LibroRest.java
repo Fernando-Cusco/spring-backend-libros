@@ -4,6 +4,7 @@ import ec.edu.ups.librosapp.models.Libro;
 import ec.edu.ups.librosapp.service.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +17,6 @@ public class LibroRest {
     @Autowired
     private LibroService service;
 
-
     @GetMapping(value = "/libro/all")
     public ResponseEntity<List<Libro>> libros() {
         List<Libro> libros = service.findAll();
@@ -25,6 +25,7 @@ public class LibroRest {
         }
         return ResponseEntity.ok().build();
     }
+
 
     @GetMapping(value = "/libro/{id}")
     public ResponseEntity<Libro> buscar(@PathVariable int id) {

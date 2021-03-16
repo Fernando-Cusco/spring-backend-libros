@@ -1,5 +1,6 @@
 package ec.edu.ups.librosapp.service;
 
+import ec.edu.ups.librosapp.dao.IRolDao;
 import ec.edu.ups.librosapp.dao.IUsuarioDao;
 import ec.edu.ups.librosapp.models.Rol;
 import ec.edu.ups.librosapp.models.Usuario;
@@ -7,13 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import javax.management.relation.Role;
+import java.util.*;
 
 @Service
 public class UsuarioService implements IUsuarioService{
 
     @Autowired
     private IUsuarioDao dao;
+
+    @Autowired
+    private IRolDao rolDao;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -30,6 +35,8 @@ public class UsuarioService implements IUsuarioService{
 
     @Override
     public void save(Usuario usuario) {
+        Rol usuarioRol = rolDao.findByName("USER");
+        usuario.addRole(usuarioRol);
         String encodePassword = passwordEncoder.encode(usuario.getPassword());
         usuario.setPassword(encodePassword);
         dao.save(usuario);

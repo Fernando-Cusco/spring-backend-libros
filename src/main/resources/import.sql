@@ -1,0 +1,2 @@
+insert into roles(id, authority, descripcion) values (1, 'USER', 'este rol solo es capaz de ver la informacion');
+insert into roles(id, authority, descripcion) values (2, 'ADMIN', 'este rol tiene permisos de edicion');

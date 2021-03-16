@@ -3,6 +3,7 @@ package ec.edu.ups.librosapp.rest;
 import ec.edu.ups.librosapp.models.Usuario;
 import ec.edu.ups.librosapp.service.IUsuarioService;
 import ec.edu.ups.librosapp.utils.Credenciales;
+import ec.edu.ups.librosapp.utils.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ public class UsuarioRest {
 
     @Autowired
     private IUsuarioService service;
+
 
     @PostMapping("/usuario")
     public ResponseEntity<Usuario> nuevo(@RequestBody Usuario usuario) {
@@ -30,6 +32,7 @@ public class UsuarioRest {
             if (usuario != null) {
                 usuario.setPassword("");
                 usuario.setCorrectLogin(true);
+                usuario.setToken(TokenProvider.generarToken(usuario));
                 return ResponseEntity.ok(usuario);
             } else {
                 empty.setCorrectLogin(false);
