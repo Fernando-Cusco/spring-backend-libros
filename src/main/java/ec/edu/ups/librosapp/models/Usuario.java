@@ -5,10 +5,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
-public class Usuario implements Serializable {
+public class Usuario implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -31,10 +32,15 @@ public class Usuario implements Serializable {
     private String password;
 
     private String estado;
+
     private boolean correctLogin;
+
+
     @Column(name = "create_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createAt;
+
+
 
     private static final long serialVersionUID = 1L;
 

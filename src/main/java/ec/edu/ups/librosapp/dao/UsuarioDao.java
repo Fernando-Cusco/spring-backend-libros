@@ -1,5 +1,6 @@
 package ec.edu.ups.librosapp.dao;
 
+import ec.edu.ups.librosapp.models.Rol;
 import ec.edu.ups.librosapp.models.Usuario;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -61,4 +62,5 @@ public class UsuarioDao implements IUsuarioDao{
         Usuario usuario = query.getSingleResult();
         return usuario;
     }
+
 }

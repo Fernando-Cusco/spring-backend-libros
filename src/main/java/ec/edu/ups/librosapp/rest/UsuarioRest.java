@@ -18,6 +18,7 @@ public class UsuarioRest {
     @PostMapping("/usuario")
     public ResponseEntity<Usuario> nuevo(@RequestBody Usuario usuario) {
         service.save(usuario);
+        usuario.setPassword("");
         return ResponseEntity.ok(usuario);
     }
 

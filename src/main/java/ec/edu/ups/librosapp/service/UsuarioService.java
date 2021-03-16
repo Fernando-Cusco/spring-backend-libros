@@ -1,6 +1,7 @@
 package ec.edu.ups.librosapp.service;
 
 import ec.edu.ups.librosapp.dao.IUsuarioDao;
+import ec.edu.ups.librosapp.models.Rol;
 import ec.edu.ups.librosapp.models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
