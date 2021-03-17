@@ -41,7 +41,7 @@ public class ImgenRest {
         }
     }
 
-    @GetMapping("/imagen/{filename:.+}")
+    @GetMapping("/imagen/get/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> getImage(@PathVariable String filename) {
         Resource file =  service.load(filename);
