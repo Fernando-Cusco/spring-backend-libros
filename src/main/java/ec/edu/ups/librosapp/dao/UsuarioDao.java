@@ -30,8 +30,13 @@ public class UsuarioDao implements IUsuarioDao{
     @Override
     public Usuario findById(int id) {
         Session session = em.unwrap(Session.class);
-        Usuario usuario = session.get(Usuario.class, id);
-        return usuario;
+        try {
+            Usuario usuario = session.get(Usuario.class, id);
+            return usuario;
+        } catch (NoResultException e) {
+
+        }
+        return null;
     }
 
     @Override

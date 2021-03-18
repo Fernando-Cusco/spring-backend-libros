@@ -5,7 +5,9 @@ import ec.edu.ups.librosapp.service.IUsuarioService;
 import ec.edu.ups.librosapp.utils.Credenciales;
 import ec.edu.ups.librosapp.utils.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,14 +19,14 @@ public class UsuarioRest {
     private IUsuarioService service;
 
 
-    @PostMapping("/usuario")
+    @PostMapping("/registro")
     public ResponseEntity<Usuario> nuevo(@RequestBody Usuario usuario) {
         service.save(usuario);
         usuario.setPassword("");
         return ResponseEntity.ok(usuario);
     }
 
-    @PostMapping("/usuario/login")
+    @PostMapping("/login")
     public ResponseEntity<Usuario> login(@RequestBody Credenciales credenciales) {
         Usuario empty = new Usuario();
         if (!credenciales.getEmail().isEmpty() && !credenciales.getPassword().isEmpty()) {
@@ -41,6 +43,16 @@ public class UsuarioRest {
         }
         empty.setCorrectLogin(false);
         return ResponseEntity.ok(empty);
+    }
+
+    @GetMapping("/usuario/perfil/{id}")
+    public ResponseEntity<?> buscarUsuario(@PathVariable("id") int id) {
+        Usuario usuario = service.findById(id);
+        usuario.setPassword("");
+        if (usuario != null) {
+            return new ResponseEntity(usuario, HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity(new String("Usuario no encontrado"), HttpStatus.NO_CONTENT);
     }
 
 }
